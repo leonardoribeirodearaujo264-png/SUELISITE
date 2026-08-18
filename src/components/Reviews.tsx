@@ -9,7 +9,16 @@ import {
 import { SectionHeading } from "./ui/SectionHeading";
 import { Reveal } from "./ui/Reveal";
 
-function Stars({ value, className = "" }: { value: number; className?: string }) {
+function Stars({
+  value,
+  className = "",
+  size = "sm",
+}: {
+  value: number;
+  className?: string;
+  size?: "sm" | "md";
+}) {
+  const dim = size === "sm" ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-4 w-4";
   return (
     <div
       className={`flex items-center gap-0.5 ${className}`}
@@ -20,7 +29,7 @@ function Stars({ value, className = "" }: { value: number; className?: string })
         <Star
           key={i}
           aria-hidden="true"
-          className={`h-4 w-4 ${
+          className={`${dim} ${
             i < Math.round(value)
               ? "fill-gold-400 text-gold-400"
               : "text-navy-200"
@@ -59,63 +68,68 @@ export function Reviews() {
   return (
     <section
       aria-labelledby="avaliacoes-title"
-      className="border-y border-navy-100 bg-mist py-20 lg:py-28"
+      className="border-y border-navy-100 bg-mist py-16 lg:py-28"
     >
       <div className="shell">
         <SectionHeading
           eyebrow="Avaliações no Google"
           id="avaliacoes-title"
           title="O que os clientes escreveram sobre o escritório."
-          description="Comentários publicados por clientes no perfil da SCD Advocacia & Consultoria Jurídica no Google. Qualquer pessoa pode conferir todos eles diretamente no perfil."
+          description="Comentários publicados no perfil da SCD Advocacia no Google. Qualquer pessoa pode conferir todos eles diretamente no perfil."
         />
 
-        {/* Aggregate — the figures come straight from the Google profile */}
-        <div className="mx-auto mt-10 flex w-full max-w-md flex-col items-center gap-3 rounded-3xl border border-navy-100 bg-white px-6 py-6 shadow-card sm:flex-row sm:justify-center sm:gap-6">
-          <div className="flex items-center gap-3">
-            <GoogleMark className="h-7 w-7 shrink-0" />
-            <span className="font-display text-[2.35rem] font-semibold leading-none text-navy-800">
-              {GOOGLE_RATING.toFixed(1).replace(".", ",")}
-            </span>
-          </div>
+        {/* Aggregate — compact single row; figures come from the Google profile */}
+        <div className="mx-auto mt-7 flex w-full max-w-sm items-center justify-center gap-3 rounded-2xl border border-navy-100 bg-white px-4 py-3 shadow-card sm:max-w-md sm:gap-5 sm:px-6 sm:py-5">
+          <GoogleMark className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" />
+          <span className="font-display text-[1.75rem] font-semibold leading-none text-navy-800 sm:text-[2.25rem]">
+            {GOOGLE_RATING.toFixed(1).replace(".", ",")}
+          </span>
           <div
             aria-hidden="true"
-            className="hidden h-10 w-px bg-navy-100 sm:block"
+            className="h-8 w-px shrink-0 bg-navy-100 sm:h-10"
           />
-          <div className="text-center sm:text-left">
-            <Stars value={GOOGLE_RATING} className="justify-center sm:justify-start" />
-            <p className="mt-1.5 text-[0.88rem] text-muted">
+          <div className="min-w-0">
+            <Stars value={GOOGLE_RATING} size="md" />
+            <p className="mt-1 text-[0.8rem] text-muted sm:text-[0.88rem]">
               {GOOGLE_REVIEW_COUNT} avaliações no Google
             </p>
           </div>
         </div>
 
-        <ul className="mt-10 grid gap-5 md:grid-cols-3 lg:gap-6">
+        {/* Two compact cards per row on phones, three from md up */}
+        <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:mt-10 lg:gap-6">
           {GOOGLE_REVIEWS.map((review, i) => (
-            <li key={review.author} className="h-full">
+            <li
+              key={review.author}
+              className={`h-full ${
+                // a lone third card would sit half-width on phones
+                i === 2 ? "col-span-2 md:col-span-1" : ""
+              }`}
+            >
               <Reveal delay={i * 0.07} className="h-full">
-                <figure className="card flex h-full flex-col">
-                  <div className="flex items-center justify-between gap-3">
+                <figure className="flex h-full flex-col rounded-2xl border border-navy-100 bg-white p-3.5 shadow-card transition-all duration-300 hover:border-azure-200 hover:shadow-lift sm:p-5 lg:rounded-3xl lg:p-7">
+                  <div className="flex items-center justify-between gap-2">
                     <Stars value={review.rating} />
-                    <GoogleMark className="h-4 w-4 shrink-0 opacity-70" />
+                    <GoogleMark className="h-3.5 w-3.5 shrink-0 opacity-70 sm:h-4 sm:w-4" />
                   </div>
 
-                  <blockquote className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-muted">
+                  <blockquote className="mt-3 flex-1 text-[0.82rem] leading-relaxed text-muted [-webkit-box-orient:vertical] [-webkit-line-clamp:5] [display:-webkit-box] overflow-hidden sm:text-[0.9rem] lg:text-[0.95rem] lg:[-webkit-line-clamp:none] lg:[display:block]">
                     {review.excerpt ? `“${review.text}…”` : `“${review.text}”`}
                   </blockquote>
 
-                  <figcaption className="mt-5 flex items-center gap-3 border-t border-navy-100 pt-4">
+                  <figcaption className="mt-3.5 flex items-center gap-2.5 border-t border-navy-100 pt-3 sm:mt-5 sm:gap-3 sm:pt-4">
                     <span
                       aria-hidden="true"
-                      className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-azure-50 font-semibold text-azure-700"
+                      className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-azure-50 text-[0.8rem] font-semibold text-azure-700 sm:h-9 sm:w-9 sm:text-[0.9rem]"
                     >
                       {review.author.charAt(0)}
                     </span>
                     <span className="min-w-0">
-                      <span className="block truncate text-[0.9rem] font-semibold text-navy-800">
+                      <span className="block truncate text-[0.8rem] font-semibold text-navy-800 sm:text-[0.9rem]">
                         {review.author}
                       </span>
                       {review.date && (
-                        <span className="block text-[0.78rem] text-navy-400">
+                        <span className="block text-[0.72rem] text-navy-400 sm:text-[0.78rem]">
                           {review.date}
                         </span>
                       )}
@@ -127,14 +141,17 @@ export function Reviews() {
           ))}
         </ul>
 
-        <div className="mt-9 text-center">
+        <div className="mt-8 text-center">
           <Link
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline"
+            className="btn-outline w-full sm:w-auto"
           >
-            Ver o perfil e todas as avaliações no Google
+            <span className="sm:hidden">Ver todas no Google</span>
+            <span className="hidden sm:inline">
+              Ver o perfil e todas as avaliações no Google
+            </span>
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>

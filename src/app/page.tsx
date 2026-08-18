@@ -11,7 +11,6 @@ import { Faq } from "@/components/Faq";
 import { FinalCta } from "@/components/FinalCta";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
-import { MobileCtaBar } from "@/components/MobileCtaBar";
 
 export default function HomePage() {
   return (
@@ -31,13 +30,9 @@ export default function HomePage() {
         <FinalCta />
       </main>
 
-      {/* room for the fixed mobile CTA bar, so it never covers the footer */}
-      <div className="pb-[4.75rem] sm:pb-0">
-        <Footer />
-      </div>
+      <Footer />
 
       <FloatingWhatsApp />
-      <MobileCtaBar />
     </>
   );
 }

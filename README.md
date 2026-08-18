@@ -35,6 +35,11 @@ Tudo que muda com frequência está em **`src/lib/site.ts`**:
 Outros conteúdos:
 
 - **Perguntas do FAQ:** `src/lib/faq.ts` (também alimenta o schema.org `FAQPage`).
+- **Posts do Instagram:** `src/lib/instagram.ts`. No celular a seção é uma galeria
+  quadrada montada com miniaturas locais (`public/images/instagram/<código>.jpg`,
+  640×640); no desktop os três primeiros posts viram embeds oficiais. Para trocar
+  um post: copie o link no Instagram, salve a miniatura quadrada com o nome do
+  código e atualize a lista.
 - **Avaliações do Google:** `src/lib/reviews.ts` — a lista começa vazia. O Google não
   permite ler avaliações sem uma chave de API server-side, e este projeto não tem
   backend. Copie os textos reais do perfil e cole no array; enquanto ele estiver

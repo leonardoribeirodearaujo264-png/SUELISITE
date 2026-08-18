@@ -1,13 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Instagram, ArrowUpRight } from "lucide-react";
+import { Instagram, ArrowUpRight, Play } from "lucide-react";
 import {
+  EMBEDDED_POSTS,
   INSTAGRAM_HANDLE,
   INSTAGRAM_POSTS,
   INSTAGRAM_TAGLINE,
   INSTAGRAM_URL,
+  postUrl,
 } from "@/lib/instagram";
 import { SectionHeading } from "./ui/SectionHeading";
 
@@ -18,30 +21,29 @@ declare global {
 }
 
 const EMBED_SCRIPT = "https://www.instagram.com/embed.js";
+/** Below this width the gallery is shown instead of the embeds. */
+const EMBED_MIN_WIDTH = 768;
 
-/**
- * Featured Instagram posts, rendered with Instagram's official embed script.
- * The script is only fetched once the section is close to the viewport, so it
- * never costs anything on first paint.
- */
 export function InstagramFeed() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const [showEmbeds, setShowEmbeds] = useState(false);
 
-  // Load the embeds only when the section is about to be seen.
+  // Embeds are desktop-only, and only once the section is close to the
+  // viewport — phones never pay for Instagram's script.
   useEffect(() => {
     const node = sectionRef.current;
-    if (!node || mounted) return;
+    if (!node) return;
+    if (!window.matchMedia(`(min-width: ${EMBED_MIN_WIDTH}px)`).matches) return;
 
     if (!("IntersectionObserver" in window)) {
-      setMounted(true);
+      setShowEmbeds(true);
       return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          setMounted(true);
+          setShowEmbeds(true);
           observer.disconnect();
         }
       },
@@ -50,19 +52,14 @@ export function InstagramFeed() {
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [mounted]);
+  }, []);
 
-  // Inject Instagram's script once, then ask it to render the blockquotes.
   useEffect(() => {
-    if (!mounted) return;
+    if (!showEmbeds) return;
 
     const process = () => window.instgrm?.Embeds.process();
 
-    const existing = document.querySelector<HTMLScriptElement>(
-      `script[src="${EMBED_SCRIPT}"]`,
-    );
-
-    if (existing) {
+    if (document.querySelector(`script[src="${EMBED_SCRIPT}"]`)) {
       process();
       return;
     }
@@ -72,14 +69,14 @@ export function InstagramFeed() {
     script.async = true;
     script.onload = process;
     document.body.appendChild(script);
-  }, [mounted]);
+  }, [showEmbeds]);
 
   return (
     <section
       ref={sectionRef}
       id="instagram"
       aria-labelledby="instagram-title"
-      className="bg-paper py-20 lg:py-28"
+      className="bg-paper py-16 lg:py-28"
     >
       <div className="shell">
         <SectionHeading
@@ -97,65 +94,99 @@ export function InstagramFeed() {
           }
         />
 
-        <div className="mx-auto mt-9 flex max-w-md items-center gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-card">
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white">
-            <Instagram className="h-[1.35rem] w-[1.35rem]" aria-hidden="true" />
+        <div className="mx-auto mt-7 flex max-w-md items-center gap-3 rounded-2xl border border-navy-100 bg-white p-3 shadow-card sm:gap-4 sm:p-4">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white sm:h-12 sm:w-12">
+            <Instagram className="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" aria-hidden="true" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-[0.95rem] font-semibold text-navy-800">
+            <p className="truncate text-[0.88rem] font-semibold text-navy-800 sm:text-[0.95rem]">
               @{INSTAGRAM_HANDLE}
             </p>
-            <p className="truncate text-[0.82rem] text-muted">
-              Direito dos autistas · Proteção integral da criança com TEA
+            <p className="truncate text-[0.76rem] text-muted sm:text-[0.82rem]">
+              Direito dos autistas · Proteção da criança com TEA
             </p>
           </div>
           <Link
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary !min-h-[2.75rem] shrink-0 !px-5 text-[0.85rem]"
+            className="btn-primary !min-h-[2.5rem] shrink-0 !px-4 text-[0.82rem] sm:!min-h-[2.75rem] sm:!px-5 sm:text-[0.85rem]"
           >
             Seguir
           </Link>
         </div>
 
-        {/* Instagram sets inline min-width/margin on its blockquote — reset it
-            so the embeds behave inside the grid on small screens. */}
+        {/* Mobile: compact square gallery, like the Instagram grid */}
+        <ul className="mt-6 grid grid-cols-3 gap-1.5 sm:gap-2 md:hidden">
+          {INSTAGRAM_POSTS.map((post) => (
+            <li key={post.code}>
+              <Link
+                href={postUrl(post)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block aspect-square overflow-hidden rounded-lg bg-mist"
+              >
+                <Image
+                  src={post.thumb}
+                  alt={post.alt}
+                  width={640}
+                  height={640}
+                  sizes="33vw"
+                  className="h-full w-full object-cover"
+                />
+                {post.kind === "reel" && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute right-1.5 top-1.5 grid h-5 w-5 place-items-center rounded-full bg-black/45 text-white"
+                  >
+                    <Play className="h-2.5 w-2.5 fill-current" />
+                  </span>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop: the live embeds, with the gallery card as the fallback */}
         <div
-          className="mt-10 grid gap-6 md:grid-cols-3
+          className="mt-10 hidden gap-6 md:grid md:grid-cols-3
                      [&_.instagram-media]:!m-0 [&_.instagram-media]:!min-w-0
                      [&_.instagram-media]:!w-full [&_.instagram-media]:!max-w-full
                      [&_.instagram-media]:!rounded-2xl [&_.instagram-media]:!shadow-none"
         >
-          {INSTAGRAM_POSTS.map((permalink, i) => (
+          {EMBEDDED_POSTS.map((post) => (
             <blockquote
-              key={permalink}
-              className="instagram-media grid min-h-[22rem] place-items-center rounded-2xl border border-navy-100 bg-mist p-6 text-center"
-              data-instgrm-permalink={permalink}
+              key={post.code}
+              className="instagram-media overflow-hidden rounded-2xl border border-navy-100 bg-mist"
+              data-instgrm-permalink={postUrl(post)}
               data-instgrm-version="14"
             >
-              {/* Shown until Instagram's script swaps in the live post — and it
-                  stays as a working link if the script never loads. */}
+              {/* Replaced by the live post once Instagram's script runs, and a
+                  working link if it never does. */}
               <Link
-                href={permalink}
+                href={postUrl(post)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex flex-col items-center gap-3 text-[0.92rem] font-medium text-navy-600 hover:text-azure-700"
+                className="block"
               >
-                <Instagram className="h-7 w-7 text-azure-600" aria-hidden="true" />
-                Ver publicação {i + 1} no Instagram
+                <Image
+                  src={post.thumb}
+                  alt={post.alt}
+                  width={640}
+                  height={640}
+                  sizes="(max-width: 1023px) 33vw, 25vw"
+                  className="aspect-square w-full object-cover"
+                />
+                <span className="flex items-center justify-center gap-2 p-4 text-[0.9rem] font-medium text-navy-700">
+                  <Instagram className="h-4 w-4 text-azure-600" aria-hidden="true" />
+                  Ver publicação no Instagram
+                </span>
               </Link>
             </blockquote>
           ))}
         </div>
 
-        {!mounted && (
-          <p className="sr-only" role="status">
-            Carregando as publicações do Instagram.
-          </p>
-        )}
-
-        <div className="mt-9 text-center">
+        <div className="mt-8 text-center">
           <Link
             href={INSTAGRAM_URL}
             target="_blank"
