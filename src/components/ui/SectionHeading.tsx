@@ -37,13 +37,13 @@ export function SectionHeading({
       )}
       <Tag
         id={id}
-        className={`mt-4 text-display-sm ${isLight ? "text-white" : "text-navy-800"}`}
+        className={`mt-3 text-display-sm sm:mt-4 ${isLight ? "text-white" : "text-navy-800"}`}
       >
         {title}
       </Tag>
       {description && (
         <p
-          className={`mt-4 text-[1.02rem] leading-relaxed ${
+          className={`mt-3 text-[0.95rem] leading-relaxed sm:mt-4 sm:text-[1.02rem] ${
             isLight ? "text-azure-100/85" : "text-muted"
           }`}
         >

@@ -1,4 +1,5 @@
 import { BadgeCheck, Info } from "lucide-react";
+import { SectionFade } from "./ui/SectionFade";
 import { WHATSAPP_BPC_MESSAGE } from "@/lib/site";
 import { WhatsAppButton } from "./ui/WhatsAppButton";
 
@@ -13,18 +14,21 @@ export function BpcSection() {
     <section
       id="bpc-loas"
       aria-labelledby="bpc-title"
-      className="relative overflow-hidden bg-navy-800 py-20 text-white lg:py-28"
+      className="relative overflow-hidden bg-navy-800 pb-[5.5rem] pt-[5.5rem] text-white sm:pb-28 sm:pt-28 lg:pb-36 lg:pt-36"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
             "radial-gradient(48rem 30rem at 88% 4%, rgba(43,114,206,.34) 0%, transparent 60%), radial-gradient(38rem 24rem at 2% 96%, rgba(21,63,124,.5) 0%, transparent 62%)",
         }}
       />
 
-      <div className="shell relative grid gap-12 lg:grid-cols-12 lg:gap-14">
+      <SectionFade edge="top" />
+      <SectionFade edge="bottom" />
+
+      <div className="shell relative z-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="lg:col-span-7">
           <p className="eyebrow eyebrow-light">Destaque · Benefício assistencial</p>
 

@@ -1,22 +1,26 @@
 import { WhatsAppButton } from "./ui/WhatsAppButton";
 import { TabDivider } from "./ui/icons";
+import { SectionFade } from "./ui/SectionFade";
 
 export function FinalCta() {
   return (
     <section
       aria-labelledby="cta-final-title"
-      className="relative overflow-hidden bg-azure-700 py-20 text-white lg:py-24"
+      className="relative overflow-hidden bg-azure-700 pb-[5.5rem] pt-[5.5rem] text-white sm:pb-28 sm:pt-28 lg:pb-32 lg:pt-32"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
             "radial-gradient(46rem 28rem at 50% -10%, rgba(255,255,255,.18) 0%, transparent 62%), radial-gradient(40rem 26rem at 88% 108%, rgba(11,26,48,.45) 0%, transparent 60%)",
         }}
       />
 
-      <div className="shell relative flex flex-col items-center text-center">
+      <SectionFade edge="top" />
+      <SectionFade edge="bottom" tone="footer" />
+
+      <div className="shell relative z-10 flex flex-col items-center text-center">
         <TabDivider className="h-4 w-28 text-gold-300" />
 
         <h2

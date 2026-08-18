@@ -93,6 +93,50 @@
            hover:-translate-y-0.5 hover:border-azure-200 hover:shadow-lift sm:p-7;
   }
 
+  /* --- Section transitions -------------------------------------------------
+     The page reads as one continuous surface: light sections fade white →
+     mist → white instead of meeting at a rule, and the two dark sections
+     ramp through azure-100 on both edges so nothing ever cuts abruptly. */
+
+  .band-soft {
+    background: linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      theme("colors.mist") 13%,
+      theme("colors.mist") 87%,
+      #ffffff 100%
+    );
+  }
+
+  /* Sits at the top edge of a dark section: white → azure-100 → the dark. */
+  .fade-into-dark {
+    background: linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      theme("colors.azure.100") 40%,
+      rgba(227, 238, 252, 0) 100%
+    );
+  }
+
+  /* Sits at the bottom edge of a dark section: the dark → azure-100 → white. */
+  .fade-out-of-dark {
+    background: linear-gradient(
+      to top,
+      #ffffff 0%,
+      theme("colors.azure.100") 40%,
+      rgba(227, 238, 252, 0) 100%
+    );
+  }
+
+  /* Bottom edge of the final CTA, landing exactly on the footer's navy. */
+  .fade-into-footer {
+    background: linear-gradient(
+      to bottom,
+      rgba(7, 18, 34, 0) 0%,
+      theme("colors.navy.900") 100%
+    );
+  }
+
   /* Extremely discreet page washes */
   .wash-top {
     background:

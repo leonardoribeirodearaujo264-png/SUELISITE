@@ -31,7 +31,7 @@ export function HowItWorks() {
   return (
     <section
       aria-labelledby="como-funciona-title"
-      className="border-y border-navy-100 bg-mist py-20 lg:py-28"
+      className="band-soft py-12 sm:py-16 lg:py-28"
     >
       <div className="shell">
         <SectionHeading
