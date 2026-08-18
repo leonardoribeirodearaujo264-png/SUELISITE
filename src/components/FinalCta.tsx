@@ -37,7 +37,7 @@ export function FinalCta() {
           Falar pelo WhatsApp
         </WhatsAppButton>
 
-        <p className="mt-5 text-[0.85rem] text-azure-200/80">
+        <p className="mt-5 text-[0.85rem] text-azure-100/90">
           Atendimento de segunda a sexta · Resposta pelo WhatsApp
         </p>
       </div>

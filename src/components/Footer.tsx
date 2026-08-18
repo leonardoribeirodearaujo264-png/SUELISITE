@@ -149,7 +149,7 @@ export function Footer() {
           </Link>
         </div>
 
-        <p className="mt-6 max-w-3xl text-[0.78rem] leading-relaxed text-azure-200/50">
+        <p className="mt-6 max-w-3xl text-[0.78rem] leading-relaxed text-azure-200/70">
           Conteúdo de caráter meramente informativo, em conformidade com o Código
           de Ética e Disciplina da OAB. Esta página não constitui oferta de
           serviços, captação de clientela ou promessa de resultado.
