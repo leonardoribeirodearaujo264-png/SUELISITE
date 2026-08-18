@@ -1,15 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Check, ArrowDown, Scale, Star } from "lucide-react";
+import { ArrowDown, Scale, Star } from "lucide-react";
 import { GOOGLE_REVIEWS_URL } from "@/lib/site";
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "@/lib/reviews";
 import { WhatsAppButton } from "./ui/WhatsAppButton";
-
-const TRUST = [
-  "Atendimento humanizado",
-  "Análise individual da situação",
-  "Orientação jurídica para famílias",
-];
 
 export function Hero() {
   return (
@@ -92,7 +86,7 @@ export function Hero() {
             </WhatsAppButton>
 
             <p className="mt-3 text-[0.88rem] text-muted">
-              Fale com nossa equipe e conte o seu caso.
+              Fale com especialista.
             </p>
           </div>
 
@@ -105,21 +99,6 @@ export function Hero() {
               Conheça os principais direitos
             </Link>
           </div>
-
-          <ul className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-x-6 lg:mt-8">
-            {TRUST.map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-2 text-[0.9rem] font-medium text-navy-600 sm:text-[0.92rem]"
-              >
-                <Check
-                  className="h-4 w-4 shrink-0 text-azure-600"
-                  aria-hidden="true"
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
 
           {/* Social proof stays out of the phone hero — it has its own section */}
           <Link
