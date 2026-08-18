@@ -18,7 +18,7 @@ export function Logo({ tone = "dark", className = "" }: Props) {
   return (
     <span className={`flex items-center gap-3 ${className}`}>
       <span
-        className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy-800 ring-1 sm:h-12 sm:w-12 ${
+        className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-deep ring-1 sm:h-12 sm:w-12 ${
           isLight ? "ring-white/15" : "ring-navy-900/10"
         }`}
       >

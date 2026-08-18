@@ -61,12 +61,12 @@
   /* Buttons — generous touch targets (min 48px tall) */
   .btn {
     @apply inline-flex min-h-[3rem] items-center justify-center gap-2.5 rounded-full px-6
-           text-[0.95rem] font-semibold leading-none transition-all duration-200
-           disabled:opacity-60;
+           py-3 text-center text-[0.95rem] font-semibold leading-none
+           transition-all duration-200 disabled:opacity-60;
   }
   .btn-wa {
-    @apply btn bg-[#128C4B] text-white shadow-[0_10px_24px_-12px_rgba(18,140,75,.75)]
-           hover:bg-[#0F7A41] hover:shadow-[0_14px_30px_-12px_rgba(18,140,75,.8)]
+    @apply btn bg-[#0F7A41] text-white shadow-[0_8px_20px_-14px_rgba(15,122,65,.7)]
+           hover:bg-[#0C6636] hover:shadow-[0_12px_26px_-14px_rgba(15,122,65,.75)]
            active:translate-y-px;
   }
   .btn-primary {
@@ -74,8 +74,8 @@
            hover:bg-azure-700 active:translate-y-px;
   }
   .btn-outline {
-    @apply btn border border-navy-200 bg-white/70 text-navy-800
-           hover:border-azure-300 hover:bg-azure-50;
+    @apply btn border border-azure-200 bg-paper text-navy-800
+           hover:border-azure-400 hover:bg-azure-50;
   }
   .btn-outline-light {
     @apply btn border border-white/25 bg-white/5 text-white hover:border-white/50 hover:bg-white/10;
@@ -83,7 +83,7 @@
 
   /* Legal-basis tag — the signature device of the rights cards */
   .law-tag {
-    @apply inline-flex items-center rounded-md border border-navy-100 bg-mist px-2 py-1
+    @apply inline-flex items-center rounded-md border border-azure-100 bg-azure-50 px-2 py-1
            text-[0.68rem] font-medium tracking-[0.02em] text-navy-500;
     font-variant-numeric: tabular-nums;
   }
@@ -93,61 +93,56 @@
            hover:-translate-y-0.5 hover:border-azure-200 hover:shadow-lift sm:p-7;
   }
 
-  /* --- Section transitions -------------------------------------------------
-     The page reads as one continuous surface: light sections fade white →
-     mist → white instead of meeting at a rule, and the two dark sections
-     ramp through azure-100 on both edges so nothing ever cuts abruptly. */
-
-  .band-soft {
-    background: linear-gradient(
-      to bottom,
-      #ffffff 0%,
-      theme("colors.mist") 13%,
-      theme("colors.mist") 87%,
-      #ffffff 100%
-    );
+  /* Primary hero CTA: a soft green wave leaves the button roughly every two
+     seconds, so it is the loudest thing on the page after the headline. */
+  .cta-pulse {
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  .cta-pulse::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    box-shadow: 0 0 0 0 rgba(15, 122, 65, 0.45);
+    animation: cta-wave 1.9s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  }
+  .cta-pulse:hover {
+    transform: scale(1.03);
   }
 
-  /* Sits at the top edge of a dark section: white → azure-100 → the dark. */
-  .fade-into-dark {
-    background: linear-gradient(
-      to bottom,
-      #ffffff 0%,
-      theme("colors.azure.100") 40%,
-      rgba(227, 238, 252, 0) 100%
-    );
+  @keyframes cta-wave {
+    0% {
+      box-shadow: 0 0 0 0 rgba(15, 122, 65, 0.45);
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(15, 122, 65, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(15, 122, 65, 0);
+    }
   }
 
-  /* Sits at the bottom edge of a dark section: the dark → azure-100 → white. */
-  .fade-out-of-dark {
-    background: linear-gradient(
-      to top,
-      #ffffff 0%,
-      theme("colors.azure.100") 40%,
-      rgba(227, 238, 252, 0) 100%
-    );
-  }
-
-  /* Bottom edge of the final CTA, landing exactly on the footer's navy. */
-  .fade-into-footer {
-    background: linear-gradient(
-      to bottom,
-      rgba(7, 18, 34, 0) 0%,
-      theme("colors.navy.900") 100%
-    );
-  }
-
-  /* Extremely discreet page washes */
+  /* Hero: white with one barely-there wash, no visible ramp */
   .wash-top {
     background:
-      radial-gradient(58rem 34rem at 78% -6%, theme("colors.azure.100") 0%, transparent 62%),
-      radial-gradient(42rem 26rem at 4% 8%, theme("colors.mist") 0%, transparent 60%);
+      radial-gradient(64rem 38rem at 82% -8%, theme("colors.wash") 0%, transparent 66%),
+      linear-gradient(to bottom, theme("colors.wash") 0%, #ffffff 42%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  /* No wave, no grow — the button keeps its colour and shadow */
+  .cta-pulse::after {
+    animation: none;
+    box-shadow: none;
+  }
+  .cta-pulse:hover {
+    transform: none;
   }
   *,
   *::before,

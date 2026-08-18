@@ -40,8 +40,8 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-navy-100/80 bg-white/90 backdrop-blur-md"
-          : "border-b border-transparent bg-white/70 backdrop-blur-sm"
+          ? "border-b border-navy-100 bg-paper"
+          : "border-b border-transparent bg-paper"
       }`}
     >
       <div className="shell flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">

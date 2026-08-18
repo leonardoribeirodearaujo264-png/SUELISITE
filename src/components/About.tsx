@@ -30,7 +30,7 @@ export function About() {
           <div className="relative">
             {/* Fixed height on phones: the portrait is 2:3, so at full width it
                 would otherwise fill a whole screen. object-top keeps the face. */}
-            <figure className="h-[300px] overflow-hidden rounded-2xl bg-mist shadow-frame ring-1 ring-navy-900/5 sm:h-[380px] lg:h-auto lg:rounded-4xl">
+            <figure className="h-[300px] overflow-hidden rounded-2xl bg-mist shadow-frame ring-1 ring-azure-100 sm:h-[380px] lg:h-auto lg:rounded-4xl">
               <Image
                 src="/images/sueli.jpg"
                 alt="Dra. Sueli Pereira Dias, advogada, em pé, sorrindo, usando blazer vermelho sobre vestido preto."

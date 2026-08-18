@@ -31,7 +31,7 @@ export function HowItWorks() {
   return (
     <section
       aria-labelledby="como-funciona-title"
-      className="band-soft py-12 sm:py-16 lg:py-28"
+      className="bg-steps py-12 sm:py-16 lg:py-28"
     >
       <div className="shell">
         <SectionHeading
@@ -57,7 +57,7 @@ export function HowItWorks() {
                       <step.icon className="h-[1.3rem] w-[1.3rem]" aria-hidden="true" />
                     </span>
                     <span
-                      className="font-display text-[2rem] font-semibold leading-none text-azure-100"
+                      className="font-display text-[2rem] font-semibold leading-none text-gold-500"
                       aria-hidden="true"
                     >
                       {step.n}

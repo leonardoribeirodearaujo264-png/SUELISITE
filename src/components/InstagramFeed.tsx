@@ -76,7 +76,7 @@ export function InstagramFeed() {
       ref={sectionRef}
       id="instagram"
       aria-labelledby="instagram-title"
-      className="bg-paper py-12 sm:py-16 lg:py-28"
+      className="bg-social py-12 sm:py-16 lg:py-28"
     >
       <div className="shell">
         <SectionHeading

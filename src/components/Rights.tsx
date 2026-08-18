@@ -84,7 +84,7 @@ export function Rights() {
     <section
       id="direitos"
       aria-labelledby="direitos-title"
-      className="band-soft py-12 sm:py-16 lg:py-28"
+      className="bg-mist py-12 sm:py-16 lg:py-28"
     >
       <div className="shell">
         <SectionHeading

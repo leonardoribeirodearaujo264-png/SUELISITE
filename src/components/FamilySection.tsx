@@ -22,7 +22,7 @@ export function FamilySection() {
               aria-hidden="true"
               className="absolute -left-4 -top-4 hidden h-28 w-28 rounded-3xl border border-gold-300/60 lg:block"
             />
-            <figure className="relative h-[280px] overflow-hidden rounded-2xl bg-mist shadow-frame ring-1 ring-navy-900/5 sm:h-[360px] lg:h-auto lg:rounded-4xl">
+            <figure className="relative h-[280px] overflow-hidden rounded-2xl bg-mist shadow-frame ring-1 ring-azure-100 sm:h-[360px] lg:h-auto lg:rounded-4xl">
               <Image
                 src="/images/criancas-dois.jpg"
                 alt="Advogada sentada no chão, abraçada por duas crianças, com outras crianças ao redor usando camisetas com o coração de quebra-cabeça da conscientização do autismo."

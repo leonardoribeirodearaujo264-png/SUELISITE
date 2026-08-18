@@ -7,8 +7,8 @@ import { WhatsAppButton } from "./ui/WhatsAppButton";
 
 const TRUST = [
   "Atendimento humanizado",
-  "Orientação jurídica especializada",
-  "Atendimento pelo WhatsApp",
+  "Análise individual da situação",
+  "Orientação jurídica para famílias",
 ];
 
 export function Hero() {
@@ -24,7 +24,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 opacity-[0.55]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(11,26,48,.045) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(13,42,74,.05) 1px, transparent 1px)",
           backgroundSize: "5.5rem 100%",
           maskImage: "linear-gradient(to bottom, black, transparent 72%)",
           WebkitMaskImage: "linear-gradient(to bottom, black, transparent 72%)",
@@ -36,11 +36,7 @@ export function Hero() {
             At its natural 3:2 proportion, so no face is ever cropped away. */}
         <div className="order-1 lg:order-2 lg:col-span-6 xl:col-span-7">
           <div className="relative">
-            <div
-              aria-hidden="true"
-              className="absolute -inset-6 -z-10 rounded-[3rem] bg-azure-100/60 blur-2xl"
-            />
-            <figure className="overflow-hidden rounded-3xl bg-mist shadow-frame ring-1 ring-navy-900/5 sm:rounded-4xl lg:rounded-5xl">
+            <figure className="overflow-hidden rounded-3xl bg-mist shadow-frame ring-1 ring-azure-100 sm:rounded-4xl lg:rounded-5xl">
               <Image
                 src="/images/criancas.jpg"
                 alt="Dra. Sueli Pereira Dias sentada ao lado de nove crianças sorrindo, todas com camisetas azuis estampadas com o coração de quebra-cabeça, símbolo da conscientização do autismo."
@@ -53,7 +49,7 @@ export function Hero() {
             </figure>
 
             {/* Legal grounding card: hangs off the frame on large screens */}
-            <div className="mt-4 hidden rounded-2xl border border-navy-100 bg-white/95 p-4 shadow-lift backdrop-blur sm:block lg:absolute lg:-bottom-9 lg:-left-10 lg:mt-0 lg:max-w-[17.5rem] lg:p-5">
+            <div className="mt-4 hidden rounded-2xl border border-navy-100 bg-paper p-4 shadow-card sm:block lg:absolute lg:-bottom-9 lg:-left-10 lg:mt-0 lg:max-w-[17.5rem] lg:p-5">
               <div className="flex items-start gap-3">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-azure-50 text-azure-700">
                   <Scale className="h-4.5 w-4.5" aria-hidden="true" />
@@ -71,30 +67,39 @@ export function Hero() {
         </div>
 
         <div className="order-2 lg:order-1 lg:col-span-6 xl:col-span-5">
-          <p className="eyebrow">Direitos da Pessoa com Autismo (TEA)</p>
+          <p className="eyebrow">Para famílias de pessoas com autismo (TEA)</p>
 
-          <h1 id="hero-title" className="mt-4 text-display-lg text-navy-800 lg:mt-5">
-            Seu filho com autismo pode ter direitos que{" "}
-            <span className="text-azure-700">você ainda não conhece.</span>
+          <h1 id="hero-title" className="mt-4 text-display-md text-navy-800 lg:mt-5">
+            Seu filho tem autismo? Você pode estar deixando de buscar{" "}
+            <span className="text-azure-700">direitos importantes</span>{" "}
+            simplesmente por não saber que eles existem.
           </h1>
 
           <p className="mt-5 max-w-xl text-[1.02rem] leading-[1.7] text-muted sm:text-[1.06rem] lg:mt-6">
-            Orientação jurídica para famílias de pessoas com Transtorno do
-            Espectro Autista (TEA) na busca pela garantia de seus direitos.
+            BPC/LOAS, tratamento de saúde, educação inclusiva, atendimento
+            prioritário e outras garantias podem fazer parte dos direitos da
+            pessoa com autismo. Descubra quais podem se aplicar à realidade do
+            seu filho.
           </p>
 
-          {/* One primary action on phones; the secondary is a quiet link */}
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-8">
+          {/* The pulsing green button is the loudest element after the headline */}
+          <div className="mt-7 lg:mt-8">
             <WhatsAppButton
-              className="w-full sm:w-auto"
-              ariaLabel="Conhecer os direitos do meu filho — falar pelo WhatsApp"
+              className="cta-pulse w-full !min-h-[3.5rem] !px-7 !leading-snug text-center uppercase tracking-[0.02em] sm:w-auto"
+              ariaLabel="Descobrir os direitos do meu filho — falar pelo WhatsApp"
             >
-              Quero conhecer os direitos do meu filho
+              Quero descobrir os direitos do meu filho
             </WhatsAppButton>
 
+            <p className="mt-3 text-[0.88rem] text-muted">
+              Fale com nossa equipe e conte o seu caso.
+            </p>
+          </div>
+
+          <div className="mt-5">
             <Link
               href="#direitos"
-              className="inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full text-[0.95rem] font-semibold text-azure-700 hover:text-azure-800 sm:border sm:border-navy-200 sm:bg-white/70 sm:px-6 sm:text-navy-800 sm:hover:border-azure-300 sm:hover:bg-azure-50"
+              className="inline-flex min-h-[2.75rem] items-center gap-2 text-[0.92rem] font-semibold text-azure-700 hover:text-azure-800"
             >
               <ArrowDown className="h-4 w-4" aria-hidden="true" />
               Conheça os principais direitos
@@ -121,7 +126,7 @@ export function Hero() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-7 hidden items-center gap-2.5 rounded-full border border-navy-100 bg-white/80 py-2.5 pl-3.5 pr-4 text-[0.85rem] text-navy-600 transition-colors hover:border-azure-300 hover:bg-white sm:inline-flex"
+            className="mt-7 hidden items-center gap-2.5 rounded-full border border-azure-200 bg-paper py-2.5 pl-3.5 pr-4 text-[0.85rem] text-navy-600 transition-colors hover:border-azure-400 hover:bg-azure-50 sm:inline-flex"
           >
             <span className="flex items-center gap-0.5" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, i) => (

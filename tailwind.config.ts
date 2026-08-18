@@ -15,8 +15,8 @@ const config: Config = {
           500: "#22497F",
           600: "#173663",
           700: "#11284A",
-          800: "#0B1A30",
-          900: "#071222",
+          800: "#0D2A4A",
+          900: "#081D33",
         },
         /* Awareness azure — the page's dominant accent */
         azure: {
@@ -35,14 +35,22 @@ const config: Config = {
         gold: {
           200: "#EBDCB8",
           300: "#DCC58C",
-          400: "#C9A55C",
-          500: "#B78F3F",
-          600: "#95712C",
+          400: "#C8A451",
+          500: "#B08C36",
+          600: "#8F7029",
         },
         ink: "#0E1726",
         muted: "#54637A",
+
+        /* Flat section surfaces. Sections alternate between these instead of
+           blending through gradients, so nothing reads as a shadow. */
         paper: "#FFFFFF",
-        mist: "#F5F9FD",
+        wash: "#F4F8FD",   /* hero */
+        mist: "#EEF5FC",   /* Você sabia / Direitos */
+        steps: "#F2F7FC",  /* Como funciona */
+        social: "#F5F8FC", /* Google e Instagram */
+        deep: "#0D2A4A",   /* BPC/LOAS */
+        graphite: "#081D33", /* rodapé */
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],
@@ -53,10 +61,11 @@ const config: Config = {
         "display-md": ["clamp(1.95rem,4.6vw,2.85rem)", { lineHeight: "1.08", letterSpacing: "-0.02em" }],
         "display-lg": ["clamp(2.15rem,5.6vw,3.4rem)", { lineHeight: "1.05", letterSpacing: "-0.022em" }],
       },
+      /* Light, blue-tinted shadows — depth without a grey cast */
       boxShadow: {
-        card: "0 1px 2px rgba(11,26,48,.04), 0 8px 24px -12px rgba(11,26,48,.10)",
-        lift: "0 2px 4px rgba(11,26,48,.05), 0 18px 42px -18px rgba(11,26,48,.18)",
-        frame: "0 24px 70px -34px rgba(11,26,48,.38)",
+        card: "0 1px 2px rgba(13,42,74,.04), 0 6px 18px -14px rgba(13,42,74,.10)",
+        lift: "0 2px 4px rgba(13,42,74,.04), 0 14px 30px -20px rgba(13,42,74,.14)",
+        frame: "0 16px 44px -32px rgba(13,42,74,.22)",
       },
       borderRadius: {
         "4xl": "2rem",

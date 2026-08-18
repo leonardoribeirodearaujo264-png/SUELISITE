@@ -68,7 +68,7 @@ export function Reviews() {
   return (
     <section
       aria-labelledby="avaliacoes-title"
-      className="band-soft py-12 sm:py-16 lg:py-28"
+      className="bg-social py-12 sm:py-16 lg:py-28"
     >
       <div className="shell">
         <SectionHeading
